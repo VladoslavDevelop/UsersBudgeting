@@ -1,0 +1,22 @@
+# Игнорирование файлов и директорий, относящихся к IDE
+.idea/
+
+# Игнорирование миграций
+*/migrations/*.py
+*/migrations/*.pyc
+!*/migrations/__init__.py
+
+# Игнорирование временных файлов
+*.pyc
+__pycache__/
+*.log
+*.sqlite3
+
+# Игнорирование виртуальных окружений
+venv/
+env/
+
+# Игнорирование файлов Docker
+*.log
+.dockerignore
+docker-compose.override.yml
