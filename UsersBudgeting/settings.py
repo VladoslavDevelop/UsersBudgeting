@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,15 +63,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'UsersBudgeting.wsgi.application'
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'XsLv9NHwV8ewmL2m',
-            'HOST': 'api_postgres',
-            'PORT': '5432',
-        }
+    'default': {
+        'ENGINE': env('DATABASE_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': env('DATABASE_NAME', 'postgres'),
+        'USER': env('DATABASE_USER', 'postgres'),
+        'PASSWORD': env('DATABASE_PASSWORD', 'XsLv9NHwV8ewmL2m'),
+        'HOST': env('DATABASE_HOST', 'api_postgres'),
+        'PORT': env('DATABASE_PORT', '5432'),
     }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

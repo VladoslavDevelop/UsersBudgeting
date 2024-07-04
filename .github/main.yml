@@ -1,0 +1,57 @@
+name: Deploy Django Project
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set short SHA
+      run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
+    - name: Build the Docker image for Backend
+      run: |
+        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }}
+
+    - name: Build the Docker image for Postgres
+      run: |
+        docker build ./POSTGRES --file ./POSTGRES/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }}
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Push the Docker image for Backend to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }}
+
+    - name: Push the Docker image for Postgres to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }}
+
+    - name: Install kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+
+    - name: Set up Kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
+        export KUBECONFIG=$PWD/kubeconfig.yaml
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f k8s/ --validate=false --kubeconfig=kubeconfig.yaml
+
+    - name: Update Kubernetes deployment backend image
+      run: |
+        kubectl set image deployment/django-backend django-backend=${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml
+
+    - name: Update Kubernetes deployment postgres image
+      run: |
+        kubectl set image deployment/api-postgres api-postgres=${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml

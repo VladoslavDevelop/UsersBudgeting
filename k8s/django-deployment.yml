@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-backend
+  template:
+    metadata:
+      labels:
+        app: django-backend
+    spec:
+      containers:
+      - name: django-backend
+        image: your-django-image:latest
+        env:
+        - name: DATABASE_ENGINE
+          value: "django.db.backends.postgresql"
+        - name: DATABASE_NAME
+          value: "postgres"
+        - name: DATABASE_USER
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          value: "XsLv9NHwV8ewmL2m"
+        - name: DATABASE_HOST
+          value: "api-postgres"
+        - name: DATABASE_PORT
+          value: "5432"
+        ports:
+        - containerPort: 8000
