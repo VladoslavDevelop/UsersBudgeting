@@ -43,6 +43,12 @@ jobs:
       run: |
         echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
 
+    - name: Verify Kubeconfig file
+      run: |
+        echo "=== Start of kubeconfig.yaml ==="
+        cat kubeconfig.yaml
+        echo "=== End of kubeconfig.yaml ==="
+
     - name: Apply Kubernetes manifests
       run: |
         kubectl apply -f k8s/ --validate=false --kubeconfig=kubeconfig.yaml
