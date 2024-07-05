@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-postgres
-        image: user_budgeting/postgres:${{ env.SHORT_SHA }}
+        image: devitworld/postgres:17754a9
         env:
         - name: POSTGRES_PASSWORD
           value: "XsLv9NHwV8ewmL2m"
@@ -27,3 +27,5 @@ spec:
       - name: postgres-storage
         persistentVolumeClaim:
           claimName: postgres-pvc
+      imagePullSecrets:
+      - name: dockerhub
