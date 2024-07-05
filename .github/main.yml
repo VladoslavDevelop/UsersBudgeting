@@ -16,22 +16,19 @@ jobs:
 
     - name: Build the Docker image for Backend
       run: |
-        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }}
+        docker build . --file Dockerfile --tag user_budgeting/backend:${{ env.SHORT_SHA }}
 
     - name: Build the Docker image for Postgres
       run: |
-        docker build ./POSTGRES --file ./POSTGRES/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }}
+        docker build POSTGRES --file POSTGRES/Dockerfile --tag user_budgeting/api-postgres:${{ env.SHORT_SHA }}
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    - name: Push the Docker image for Backend to Docker Hub
+    - name: Push the Docker images to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }}
-
-    - name: Push the Docker image for Postgres to Docker Hub
-      run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }}
+        docker push user_budgeting/backend:${{ env.SHORT_SHA }}
+        docker push user_budgeting/api-postgres:${{ env.SHORT_SHA }}
 
     - name: Install kubectl
       run: |
@@ -41,13 +38,8 @@ jobs:
 
     - name: Set up Kubeconfig
       run: |
-        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
-
-    - name: Verify Kubeconfig file
-      run: |
-        echo "=== Start of kubeconfig.yaml ==="
-        cat kubeconfig.yaml
-        echo "=== End of kubeconfig.yaml ==="
+        echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
+        export KUBECONFIG=$PWD/kubeconfig.yaml
 
     - name: Apply Kubernetes manifests
       run: |
@@ -55,8 +47,8 @@ jobs:
 
     - name: Update Kubernetes deployment backend image
       run: |
-        kubectl set image deployment/django-backend django-backend=${{ secrets.DOCKER_USERNAME }}/django_backend:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml
+        kubectl set image deployment/django-backend django-backend=user_budgeting/backend:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml
 
     - name: Update Kubernetes deployment postgres image
       run: |
-        kubectl set image deployment/api-postgres api-postgres=${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml
+        kubectl set image deployment/api-postgres api-postgres=user_budgeting/api-postgres:${{ env.SHORT_SHA }} --kubeconfig=kubeconfig.yaml

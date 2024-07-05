@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: django-backend
-        image: your-django-image:latest
+        image: user_budgeting/backend:latest
         env:
         - name: DATABASE_ENGINE
           value: "django.db.backends.postgresql"
