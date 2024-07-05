@@ -12,24 +12,24 @@
 				{
 					"name": "Обновление токена",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDQ4NTksInNjb3BlIjpmYWxzZX0.BZCVGx-nW1jUFoJwHcmYs7rip7h_a1pbqx7T51sF9gQ",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDc4ODQsInNjb3BlIjpmYWxzZX0.3IN6-KigBubjJE7MbvqcDWjhw1rPd4-_17jTSXVqRJQ",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\r\n        \"username\": \"user@user2.com\",\r\n        \"email\": \"user@user2.com\",\r\n        \"amount_exceeding\": 150.0\r\n    }",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/profile/"
+						"url": "http://localhost:8000/api/token/refresh/"
 					},
 					"response": []
 				},
@@ -91,7 +91,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@user1.com\",\r\n    \"password\": \"Barselona1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"user@user2.com\",\r\n    \"password\": \"Barselona1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -133,14 +133,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@user1.com\",\r\n    \"password\": \"Barselona1\",\r\n    \"password_confirm\": \"Barselona1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@user.com\",\r\n    \"password\": \"Barselona1\",\r\n    \"password_confirm\": \"Barselona1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8000/api/register"
+						"url": "http://localhost:8000/api/register/"
 					},
 					"response": []
 				}
@@ -186,7 +186,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDg1NzksInNjb3BlIjpmYWxzZX0.JICzV2mM6Z_sbYOegD4-h0LLCwUSFBAVelrpy1-Rb1o",
 										"type": "text"
 									}
 								],
@@ -226,7 +226,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:8000/api/categories/"
+								"url": "http://localhost:8000/api/categories/1/"
 							},
 							"response": []
 						},
@@ -317,13 +317,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDg1NzksInNjb3BlIjpmYWxzZX0.JICzV2mM6Z_sbYOegD4-h0LLCwUSFBAVelrpy1-Rb1o",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -350,14 +350,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:8000/api/transactions/6/"
+								"url": "http://localhost:8000/api/transactions/2/"
 							},
 							"response": []
 						},
@@ -416,18 +416,21 @@
 						},
 						{
 							"name": "Получение списка бюджетов",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDg1NzksInNjb3BlIjpmYWxzZX0.JICzV2mM6Z_sbYOegD4-h0LLCwUSFBAVelrpy1-Rb1o",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -478,7 +481,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000\r\n}",
+									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000000\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -530,7 +533,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDg1NzksInNjb3BlIjpmYWxzZX0.JICzV2mM6Z_sbYOegD4-h0LLCwUSFBAVelrpy1-Rb1o",
 								"type": "text"
 							}
 						],
