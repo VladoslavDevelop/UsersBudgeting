@@ -1,19 +1,30 @@
 import traceback
 
 from rest_framework import status
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from reports_and_analytics.system.controller.ReportAnalyticController import ReportAnalyticController
+from users.utils import JWTAuthentication
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 class ReportsView(APIView, ReportAnalyticController):
     """
     Получение отчетов.
     """
+    _required_parameters = []
+    _default_message = {
+        'errors': {
+            'field_not_provided': {
+                'en': 'Field {field_name} not provided',
+                'ru': 'Поле {field_name} не предоставлено'
+            }
+        }
+    }
 
     def get(self, request):
         """
@@ -42,11 +53,21 @@ class ReportsView(APIView, ReportAnalyticController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 class AnalyticsCategoryView(APIView, ReportAnalyticController):
     """
     Получение аналитики по категории.
     """
+    _required_parameters = []
+    _default_message = {
+        'errors': {
+            'field_not_provided': {
+                'en': 'Field {field_name} not provided',
+                'ru': 'Поле {field_name} не предоставлено'
+            }
+        }
+    }
 
     def get(self, request):
         """

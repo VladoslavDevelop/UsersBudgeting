@@ -1,7 +1,7 @@
 import traceback
 
 from rest_framework import status
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -11,13 +11,16 @@ from dashboard.system.controller.AdminTransactionController import AdminTransact
 from dashboard.system.controller.AdminBudgetingController import AdminBudgetingController
 from dashboard.system.controller.AdminUserController import AdminUserController
 from dashboard.system.controller.AdminReportAnalyticController import AdminReportAnalyticController
+from users.utils import JWTAuthentication
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class CategoryAllView(APIView, AdminCategoriesController):
     """
     Класс для получения всех категорий.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -33,6 +36,7 @@ class CategoryAllView(APIView, AdminCategoriesController):
         :param request:
         :return:
         """
+        _required_parameters = []
         _default_message = {
             'errors': {
                 'field_not_provided': {
@@ -62,11 +66,13 @@ class CategoryAllView(APIView, AdminCategoriesController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class CategoryDetailView(APIView, AdminCategoriesController):
     """
     Класс для работы с конкретной категорией.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -104,11 +110,13 @@ class CategoryDetailView(APIView, AdminCategoriesController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class TransactionAllView(APIView, AdminTransactionController):
     """
     Класс для получения всех транзакций.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -124,6 +132,7 @@ class TransactionAllView(APIView, AdminTransactionController):
         :param request:
         :return:
         """
+        _required_parameters = []
         _default_message = {
             'errors': {
                 'field_not_provided': {
@@ -153,11 +162,13 @@ class TransactionAllView(APIView, AdminTransactionController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class TransactionDetailView(APIView, AdminTransactionController):
     """
     Класс для работы с конкретной транзакцией.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -195,11 +206,13 @@ class TransactionDetailView(APIView, AdminTransactionController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class BudgetAllView(APIView, AdminBudgetingController):
     """
-    Класс для получения всех транзакций.
+    Класс для получения всех бюджетов.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -236,11 +249,13 @@ class BudgetAllView(APIView, AdminBudgetingController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class BudgetDetailView(APIView, AdminBudgetingController):
     """
-    Класс для работы с конкретной транзакцией.
+    Класс для работы с конкретным бюджетом.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -278,11 +293,13 @@ class BudgetDetailView(APIView, AdminBudgetingController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class UserAllView(APIView, AdminUserController):
     """
     Класс для получения всех пользователей.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -319,11 +336,13 @@ class UserAllView(APIView, AdminUserController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class UserDetailView(APIView, AdminUserController):
     """
     Класс для работы с конкретным пользователем.
     """
+    _required_parameters = []
     _default_message = {
         'errors': {
             'field_not_provided': {
@@ -335,7 +354,7 @@ class UserDetailView(APIView, AdminUserController):
 
     def get(self, request, pk):
         """
-        Получение всех пользователей.
+        Получение пользователя.
         :param request:
         :return:
         """
@@ -361,6 +380,7 @@ class UserDetailView(APIView, AdminUserController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class ReportsAllView(APIView, AdminReportAnalyticController):
     """
@@ -403,6 +423,7 @@ class ReportsAllView(APIView, AdminReportAnalyticController):
             return Response(self.error_response(), status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAdminUser])
 class AnalyticsAllView(APIView, AdminReportAnalyticController):
     """

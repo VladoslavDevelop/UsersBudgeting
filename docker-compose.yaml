@@ -13,7 +13,7 @@ services:
       - api_network
 
   api_postgres:
-    container_name: api_postgres
+    container_name: api-postgres
     networks:
       - api_network
     build: POSTGRES

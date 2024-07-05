@@ -1,5 +1,6 @@
-from pathlib import Path
 import os
+from pathlib import Path
+from drf_yasg import openapi
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'budgeting',
     'transactions',
     'reports_and_analytics',
+    'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_jwt',
@@ -110,8 +112,20 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        'users.utils.JWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'users.utils.JWTAuthentication',
     ),
+}
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'DEFAULT_INFO': './api_info.py',
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
 }

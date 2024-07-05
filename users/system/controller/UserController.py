@@ -2,6 +2,7 @@ import re
 import traceback
 
 from django.contrib.auth import password_validation
+from django.db import IntegrityError
 
 from Core.Controller.BaseController import BaseController
 
@@ -21,6 +22,7 @@ class UserController(BaseController):
     is_request = False
     search_is_email = False
     token = None
+    error_data = {}
 
     def create_user(self):
         """
@@ -30,10 +32,12 @@ class UserController(BaseController):
 
         self.generate_payload_user()
         self.create_obj()
+
         obj_entity = UserEntities(self.obj)
         self.serializer_data = UserSerializer(obj_entity).serialize()
 
     def generate_payload_user(self):
+
         self.payload = {
             'username': self.post_data.get('email'),
             'email': self.post_data.get('email'),
@@ -56,6 +60,7 @@ class UserController(BaseController):
         """
 
         super().validate_parameters(request)
+
         if self.is_create:
             if self.post_data.get('password') != self.post_data.get('password_confirm'):
                 self.error_data['password_confirm'] = 'Пароли не совпадают'
@@ -84,6 +89,7 @@ class UserController(BaseController):
         Авторизация пользователя.
         :return:
         """
+
         self.get_obj()
         self.validate_creds()
 
@@ -123,12 +129,15 @@ class UserController(BaseController):
         Выход пользователя.
         :return:
         """
+
         self.get_obj()
+        try:
+            BlacklistedToken.objects.create(token=self.token)
+        except IntegrityError:
+            self.error_data = {'error': 'Токен уже добавлен в черный список'}
+            return
 
-        BlacklistedToken.objects.create(token=self.token)
-
-        obj_entity = UserEntitiesShort(self.obj)
-        self.serializer_data = UserShortSerializer(obj_entity).serialize()
+        self.serializer_data = "Выход успешно осуществлен"
 
     def get_user(self):
         """
@@ -137,15 +146,6 @@ class UserController(BaseController):
         """
 
         self.get_obj()
-
-        print(f"token {self.obj.token}")
-        print(f"activ token {self.obj.is_token_blacklisted(token=self.obj.token)}")
-
-        if self.obj.is_token_blacklisted(
-            token=self.obj.token
-        ):
-            self.error_data['token'] = 'Токен пользователя заблокирован'
-            return
 
         obj_entity = UserEntitiesShort(self.obj)
         self.serializer_data = UserProfileSerializer(obj_entity).serialize()
@@ -157,8 +157,12 @@ class UserController(BaseController):
         """
 
         self.get_obj()
-        self.obj.token = self.obj.generate_token()
-        self.obj.save()
+
+        try:
+            BlacklistedToken.objects.create(token=self.token)
+        except IntegrityError:
+            self.error_data = {'error': 'Токен уже добавлен в черный список'}
+            return
 
         obj_entity = UserEntities(self.obj)
         self.serializer_data = UserSerializer(obj_entity).serialize()
@@ -177,4 +181,3 @@ class UserController(BaseController):
 
         obj_entity = UserEntitiesShort(self.obj)
         self.serializer_data = UserProfileSerializer(obj_entity).serialize()
-

@@ -118,6 +118,8 @@ class TransactionController(BaseController):
             obj_entity = TransactionEntities(obj)
             self.serializer_data.append(TransactionSerializer(obj_entity).serialize())
 
+        self.serializer_data = sorted(self.serializer_data, key=lambda x: x['id'])
+
     def get_list(self):
         """
         Получение списка транзакций.
