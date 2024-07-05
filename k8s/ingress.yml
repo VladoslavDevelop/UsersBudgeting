@@ -1,18 +1,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: django-ingress
+  name: django-backend-ingress
+  namespace: default  # убедитесь, что namespace правильный, если используете другой namespace, укажите его
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - budgetsgtt4akwwrl.controllabs.cc
+      secretName: django-backend-tls  # Название секрета с TLS сертификатами
   rules:
-  - host: budgetsgtt4akwwrl.controllabs.cc
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: django-backend
-            port:
-              number: 8000
+    - host: budgetsgtt4akwwrl.controllabs.cc
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: django-backend
+                port:
+                  number: 8000
