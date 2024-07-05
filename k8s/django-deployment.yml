@@ -13,7 +13,7 @@ spec:
         app: django-backend
     spec:
       containers:
-      - name: devitworld/django-backend
+      - name: django-backend
         image: user_budgeting/backend:latest
         env:
         - name: DATABASE_ENGINE
