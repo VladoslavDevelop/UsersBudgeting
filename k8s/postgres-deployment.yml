@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-postgres
-        image: devitworld/postgres:17754a9
+        image: devitworld/postgres:latest
         env:
         - name: POSTGRES_PASSWORD
           value: "XsLv9NHwV8ewmL2m"
