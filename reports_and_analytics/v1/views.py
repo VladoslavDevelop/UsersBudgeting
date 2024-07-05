@@ -1,5 +1,7 @@
 import traceback
 
+from drf_yasg.utils import swagger_auto_schema
+
 from rest_framework import status
 from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -8,6 +10,7 @@ from rest_framework.views import APIView
 
 from reports_and_analytics.system.controller.ReportAnalyticController import ReportAnalyticController
 from users.utils import JWTAuthentication
+from reports_and_analytics.documentation import *
 
 
 @authentication_classes([JWTAuthentication])
@@ -26,6 +29,13 @@ class ReportsView(APIView, ReportAnalyticController):
         }
     }
 
+    @swagger_auto_schema(
+        operation_summary='Получение отчетов',
+        operation_description="Получение отчетов о совершенных транзакциях пользователя",
+        tags=['reports'],
+        security=["JWT"],
+        responses=response_report_transaction()
+    )
     def get(self, request):
         """
         Получение отчетов.
@@ -69,6 +79,13 @@ class AnalyticsCategoryView(APIView, ReportAnalyticController):
         }
     }
 
+    @swagger_auto_schema(
+        operation_summary='Получение аналитики',
+        operation_description="Получение аналитики по категории пользователя",
+        tags=['analytics'],
+        security=["JWT"],
+        responses=response_report_analytic_categories()
+    )
     def get(self, request):
         """
         Получение аналитики.
