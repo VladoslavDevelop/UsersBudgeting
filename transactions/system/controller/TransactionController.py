@@ -67,11 +67,12 @@ class TransactionController(BaseController):
             is_active=True
         )
         if budgeting_search.exists():
-            budgeting = budgeting_search.first()
-            budgeting.total_spent += Decimal(self.post_data.get('amount'))
-            budgeting.save()
-            if budgeting.total_spent > budgeting.amount_budgeting:
-                self.budgeting_total_spend = True
+            if self.post_data.get('type') == 'expense':
+                budgeting = budgeting_search.first()
+                budgeting.total_spent += Decimal(self.post_data.get('amount'))
+                budgeting.save()
+                if budgeting.total_spent > budgeting.amount_budgeting:
+                    self.budgeting_total_spend = True
 
         self.obj = Transactions.objects.create(
             category=category.first(),
