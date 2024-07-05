@@ -1,0 +1,928 @@
+{
+	"info": {
+		"_postman_id": "403c1521-7312-4f07-b24d-0ae45579a8ca",
+		"name": "UsersBudgeting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27033890"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Обновление токена",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDQ4NTksInNjb3BlIjpmYWxzZX0.BZCVGx-nW1jUFoJwHcmYs7rip7h_a1pbqx7T51sF9gQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"username\": \"user@user2.com\",\r\n        \"email\": \"user@user2.com\",\r\n        \"amount_exceeding\": 150.0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/profile/"
+					},
+					"response": []
+				},
+				{
+					"name": "Информация о пользователе",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDQ4NTksInNjb3BlIjpmYWxzZX0.BZCVGx-nW1jUFoJwHcmYs7rip7h_a1pbqx7T51sF9gQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/profile/"
+					},
+					"response": []
+				},
+				{
+					"name": "Выход",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTUzNzcsInNjb3BlIjpmYWxzZX0.yhBOu87LLXlivlgiqnvcNFdxD609KVwfS2r58GGNBv0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/logout/"
+					},
+					"response": []
+				},
+				{
+					"name": "Авторизация",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@user1.com\",\r\n    \"password\": \"Barselona1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/login/"
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение информации о пользователе",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDQ4NTksInNjb3BlIjpmYWxzZX0.BZCVGx-nW1jUFoJwHcmYs7rip7h_a1pbqx7T51sF9gQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"username\": \"user@user2.com\",\r\n        \"email\": \"user@user2.com\",\r\n        \"amount_exceeding\": 150.0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/profile/"
+					},
+					"response": []
+				},
+				{
+					"name": "Регистрация",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@user1.com\",\r\n    \"password\": \"Barselona1\",\r\n    \"password_confirm\": \"Barselona1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "finance_controll",
+			"item": [
+				{
+					"name": "categories",
+					"item": [
+						{
+							"name": "Создание категории",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Развлечения\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/categories/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение списка категорий",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/categories/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение конкретной категории",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/categories/"
+							},
+							"response": []
+						},
+						{
+							"name": "Изменение конкретной категории",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/categories/1/"
+							},
+							"response": []
+						},
+						{
+							"name": "Удаление категории",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/categories/1/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transactions",
+					"item": [
+						{
+							"name": "Создание транзакции",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/transactions/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение списка транзакций",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/transactions/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение конкретной транзакции",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/transactions/6/"
+							},
+							"response": []
+						},
+						{
+							"name": "Изменение транзакции",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 2,\r\n    \"amount\": 1200,\r\n    \"type\": \"income\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/transactions/2/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "budgeting",
+					"item": [
+						{
+							"name": "Создание бюджета",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/budgeting/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение списка бюджетов",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/budgeting/"
+							},
+							"response": []
+						},
+						{
+							"name": "Получение конкретного бюджета",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/budgeting/1/"
+							},
+							"response": []
+						},
+						{
+							"name": "Изменения бюджета",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category_id\": 4,\r\n    \"amount_budgeting\": 50000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/budgeting/1/"
+							},
+							"response": []
+						},
+						{
+							"name": "Удаление бюджета",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/budgeting/1/"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reports_and_analytics",
+			"item": [
+				{
+					"name": "Получение отчета за выбранный период",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE3MjAwOTk1MDksInNjb3BlIjpmYWxzZX0.otEmG4M2Qi0KxpA9mLx6O4CCDsp4bd-8itCLGx5B0mw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reports/?start=2024-07-01&end=2024-07-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reports",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2024-07-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-07-05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение аналитики по категориям",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE3MjAyNDg1NzksInNjb3BlIjpmYWxzZX0.JICzV2mM6Z_sbYOegD4-h0LLCwUSFBAVelrpy1-Rb1o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/reports/categories/?start=2024-07-01&end=2024-07-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reports",
+								"categories",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2024-07-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-07-05"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dashboard",
+			"item": [
+				{
+					"name": "Получение всех категорий",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/category/all/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение конкретно категории",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/category/9/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех транзакций",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/transaction/all/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение конкретной транзакции",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/transaction/4/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех бюджетов",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/budget/all/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение конкретного бюджета",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/budget/1/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех пользователей",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/user/all/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение конкретного пользователя",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/dashboard/user/3/"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение отчета для конкретного пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/dashboard/reports/?start=2024-07-01&end=2024-07-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"dashboard",
+								"reports",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2024-07-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-07-05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение аналитики для конкретного пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MjAxODY1MzEsInNjb3BlIjp0cnVlfQ.6eBcNIKSffEI1Zy6l1YX966ecjsTwaUEfIMDUPCXgwg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/dashboard/analytics/?start=2024-07-01&end=2024-07-05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"dashboard",
+								"analytics",
+								""
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2024-07-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-07-05"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
